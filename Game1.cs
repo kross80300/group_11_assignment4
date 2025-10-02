@@ -13,7 +13,7 @@ public class Game1 : Game
     private Texture2D _planetTexture;
     private Texture2D _starTexture;
     private Vector2 _planetPosition;
-    private List<StarTextureInstance> instances = new List<StarTextureInstance>();
+    private List<Star> stars = new List<Star>();
     private int numberOfStars = 1000;
     Random random = new Random();
 
@@ -31,7 +31,6 @@ public class Game1 : Game
     {
         // TODO: Add your initialization logic here
         _planetPosition = new Vector2(1200, 50);
-        InitializeTextures();
 
         base.Initialize();
     }
@@ -43,6 +42,8 @@ public class Game1 : Game
         // TODO: use this.Content to load your game content here
         _planetTexture = Content.Load<Texture2D>("img/planet");
         _starTexture = Content.Load<Texture2D>("img/star");
+        
+        InitializeTextures();
     }
 
     protected override void Update(GameTime gameTime)
@@ -52,6 +53,10 @@ public class Game1 : Game
             Exit();
 
         // TODO: Add your update logic here
+        foreach (var star in stars)
+        {
+            star.Update(gameTime);
+        }
 
         base.Update(gameTime);
     }
@@ -63,7 +68,7 @@ public class Game1 : Game
             float x = (float)(random.NextDouble() * GraphicsDevice.Viewport.Width);
             float y = (float)(random.NextDouble() * GraphicsDevice.Viewport.Height);
 
-            instances.Add(new StarTextureInstance { Position = new Vector2(x, y) });
+            stars.Add(new Star(_starTexture, new Vector2(x, y), random));
         }
     }
 
@@ -73,19 +78,10 @@ public class Game1 : Game
 
         // TODO: Add your drawing code here
         
-        _spriteBatch.Begin();
-
-        foreach (var instance in instances)
+        _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive);
+        foreach (var star in stars)
         {
-            _spriteBatch.Draw(_starTexture,
-                (Vector2)instance.Position,
-                null,
-                new Color(255, 255, 255, 20),
-                0f,
-                Vector2.Zero,
-                0.001f,
-                SpriteEffects.None,
-                0f);
+            star.Draw(_spriteBatch);
         }
         _spriteBatch.End();
         
@@ -107,6 +103,8 @@ public class Game1 : Game
     public class StarTextureInstance
     {
         public Vector2 Position { get; set; }
-        public Texture2D Texture { get; set; }
+        public float Alpha { get; set; }
+        public float Time { get; set; }
+        public float TwinkleSpeed { get; set; }
     }
 }
