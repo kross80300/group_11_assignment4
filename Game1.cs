@@ -22,13 +22,15 @@ public class Game1 : Game
         _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
-        Window.AllowUserResizing = true;
+        _graphics.PreferredBackBufferWidth = 1600;
+        _graphics.PreferredBackBufferHeight = 800;
+        _graphics.ApplyChanges();
     }
 
     protected override void Initialize()
     {
         // TODO: Add your initialization logic here
-        _planetPosition = new Vector2(500, 25);
+        _planetPosition = new Vector2(1200, 50);
         InitializeTextures();
 
         base.Initialize();
