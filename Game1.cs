@@ -17,6 +17,10 @@ public class Game1 : Game
     private Vector2 _planetPosition;
     private List<Star> stars = new List<Star>();
     private Asteroid asteroid;
+    private Spaceship spaceship1;
+    private Spaceship spaceship2;
+    private Texture2D spaceship;
+    private Texture2D thrust;
 
     private int numberOfStars = 1000;
     Random random = new Random();
@@ -47,8 +51,13 @@ public class Game1 : Game
         _planetTexture = Content.Load<Texture2D>("img/planet");
         _starTexture = Content.Load<Texture2D>("img/star");
         _asteroidTexture = Content.Load<Texture2D>("img/asteroid");
+        _spaceship = Content.Load<Texture2D>("img/spaceship");
+        _thrust = Content.Load<Texture2D>("img/thrust");
 
         asteroid = new Asteroid(_asteroidTexture, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight);
+
+        spaceship1 = new Spaceship(_spaceship, _thrust, new Vector2(0, 0), new Vector2(2, 1), 0.4f);
+        spaceship2 = new Spaceship(_spaceship, _thrust, new Vector2(200, 0), new Vector2(5, 2), 0.5f);
 
         InitializeTextures();
     }
@@ -66,6 +75,8 @@ public class Game1 : Game
         }
 
         asteroid.Update(gameTime);
+        spaceship1.move(1600, 800, 0.4f)
+        spaceship2.move(1600, 800, 0.5f)
 
         base.Update(gameTime);
     }
@@ -85,7 +96,10 @@ public class Game1 : Game
     {
         GraphicsDevice.Clear(Color.Black);
 
-        // TODO: Add your drawing code here
+        _spriteBatch.Begin();
+        spaceship1.display(spriteBatch, 0.4f)
+        spaceship2.display(spriteBatch, 0.5f)
+        _spriteBatch.End();
 
         _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive);
         foreach (var star in stars)
