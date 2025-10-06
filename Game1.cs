@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using project2;
 
 namespace group_11_assignment4;
 
@@ -12,8 +13,11 @@ public class Game1 : Game
     private SpriteBatch _spriteBatch;
     private Texture2D _planetTexture;
     private Texture2D _starTexture;
+    private Texture2D _asteroidTexture;
     private Vector2 _planetPosition;
     private List<Star> stars = new List<Star>();
+    private Asteroid asteroid;
+
     private int numberOfStars = 1000;
     Random random = new Random();
 
@@ -42,7 +46,10 @@ public class Game1 : Game
         // TODO: use this.Content to load your game content here
         _planetTexture = Content.Load<Texture2D>("img/planet");
         _starTexture = Content.Load<Texture2D>("img/star");
-        
+        _asteroidTexture = Content.Load<Texture2D>("img/asteroid");
+
+        asteroid = new Asteroid(_asteroidTexture, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight);
+
         InitializeTextures();
     }
 
@@ -57,6 +64,8 @@ public class Game1 : Game
         {
             star.Update(gameTime);
         }
+
+        asteroid.Update(gameTime);
 
         base.Update(gameTime);
     }
@@ -77,14 +86,14 @@ public class Game1 : Game
         GraphicsDevice.Clear(Color.Black);
 
         // TODO: Add your drawing code here
-        
+
         _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive);
         foreach (var star in stars)
         {
             star.Draw(_spriteBatch);
         }
         _spriteBatch.End();
-        
+
         _spriteBatch.Begin();
         _spriteBatch.Draw(_planetTexture,
             _planetPosition,
@@ -95,6 +104,10 @@ public class Game1 : Game
             0.1f,
             SpriteEffects.None,
             0f);
+        _spriteBatch.End();
+
+        _spriteBatch.Begin();
+        asteroid.Draw(_spriteBatch);
         _spriteBatch.End();
 
         base.Draw(gameTime);

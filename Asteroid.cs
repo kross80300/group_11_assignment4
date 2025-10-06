@@ -19,7 +19,7 @@ namespace project2
             this.texture = texture;
             this.screenWidth = screenWidth;
 
-            position = new Vector2(0, screenHeight / 2f);
+            position = new Vector2(screenWidth / 4f, screenHeight / 2f);
             rotation = 0f;
             speed = 200f;
             rotationSpeed = 1.5f;

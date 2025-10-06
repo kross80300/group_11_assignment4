@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using group_11_assignment4;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -82,7 +83,7 @@ public class Game1 : Game
 
     protected override void Draw(GameTime gameTime)
     {
-        GraphicsDevice.Clear(Color.Black);
+        GraphicsDevice.Clear(Color.DarkBlue);
 
         // TODO: Add your drawing code here
 
