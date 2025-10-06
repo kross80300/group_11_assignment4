@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace sra2745_assignment4;
 
-public class Spaceship   
+public class Spaceship
 {
     public Vector2 Origin { get; set; } = Vector2.Zero;
     public Vector2 Speed { get; set; } = new Vector2(1, 0);
@@ -13,6 +13,7 @@ public class Spaceship
     public Texture2D ThrustTexture { get; set; }
 
     public float Scale { get; set; } = 0.7f;
+    public Vector2 Direction { get; set; } = new Vector2(1, 0);
     public Spaceship(Texture2D texture)
     {
         Texture = texture;
@@ -25,6 +26,7 @@ public class Spaceship
         Origin = position;
         Speed = speed;
         Scale = scale;
+        Direction = speed;
     }
 
     // Move and wrap when reaching the edge
@@ -47,7 +49,7 @@ public class Spaceship
         spriteBatch.Draw(Texture, Origin, null, Color.White, 0f, Vector2.Zero, Scale, SpriteEffects.None, 0f);
         if (Speed.X > 0 || Speed.Y > 0)
         {
-            spriteBatch.Draw(ThrustTexture, Origin + new Vector2(0.0f, 0.0f), null, thrustEffect(scale, Speed), 0f, Vector2.Zero, Scale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(ThrustTexture, Origin + new Vector2(-28 * scale, 5 * scale), null, thrustEffect(scale, Speed), 0f, Vector2.Zero, Scale, SpriteEffects.None, 0f);
         }
     }
 
