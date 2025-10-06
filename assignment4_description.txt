@@ -1,0 +1,37 @@
+The animation is a scene set in outer space, where multiple spaceships travel across the stars while an asteroid moves across the screen.
+
+Team Member Objects and Appearances
+Katie: Background
+- Space background with star textures and planet
+- the stars twinkle throughout the animation
+
+Spencer: Spaceship
+- spaceship textures with thruster textures that move along with the spaceship
+
+Anunay: Asteroid
+- an asteroid texture that moves across the screen
+
+Object Animations
+Spaceships move smoothly across the screen on similar paths going various speeds with thrusters glowing various brightness depending on velocity
+Asteroid moves across the screen on a repeating paths, spinning as it moves
+Stars and planets are static in the background of the animation; stars will flicker throughout the animation
+
+Classes and Structures
+Each object is in its own class:
+
+Spaceship
+Fields: texture, thrustTexture, position, speed, scale
+Constructors: initialize spaceship parameters
+Functions: display(), move(), thrustEffect()
+
+Asteroid
+Fields: position, screenWidth, screenHeight
+Constructors: initialize asteroid 
+Functions: Update and Draw
+
+Star
+Fields: texture, position, rng
+Constructors: initialize space properties
+Functions: update(), draw()
+
+

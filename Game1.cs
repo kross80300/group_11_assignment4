@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using project2;
+using sra2745_assignment4;
 
 namespace group_11_assignment4;
 
@@ -19,8 +20,8 @@ public class Game1 : Game
     private Asteroid asteroid;
     private Spaceship spaceship1;
     private Spaceship spaceship2;
-    private Texture2D spaceship;
-    private Texture2D thrust;
+    private Texture2D _spaceship;
+    private Texture2D _thrust;
 
     private int numberOfStars = 1000;
     Random random = new Random();
@@ -75,8 +76,8 @@ public class Game1 : Game
         }
 
         asteroid.Update(gameTime);
-        spaceship1.move(1600, 800, 0.4f)
-        spaceship2.move(1600, 800, 0.5f)
+        spaceship1.Move(1600, 800, 0.4f);
+        spaceship2.Move(1600, 800, 0.5f);
 
         base.Update(gameTime);
     }
@@ -95,11 +96,6 @@ public class Game1 : Game
     protected override void Draw(GameTime gameTime)
     {
         GraphicsDevice.Clear(Color.Black);
-
-        _spriteBatch.Begin();
-        spaceship1.display(spriteBatch, 0.4f)
-        spaceship2.display(spriteBatch, 0.5f)
-        _spriteBatch.End();
 
         _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive);
         foreach (var star in stars)
@@ -122,6 +118,11 @@ public class Game1 : Game
 
         _spriteBatch.Begin();
         asteroid.Draw(_spriteBatch);
+        _spriteBatch.End();
+        
+        _spriteBatch.Begin();
+        spaceship1.display(_spriteBatch, 0.4f);
+        spaceship2.display(_spriteBatch, 0.5f);
         _spriteBatch.End();
 
         base.Draw(gameTime);
